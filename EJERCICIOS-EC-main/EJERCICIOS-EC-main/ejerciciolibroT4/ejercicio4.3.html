@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let mapa = new Map();
+      mapa.set("41700", "Dos Hermanas");
+      mapa.set("21440", "Lepe");
+      mapa.set("11160", "Barbate");
+      mapa.set("1138", "Tarifa");
+      mapa.set("41013", "Sevilla");
+      function checkMap(unMapa) {
+        for (let [clave, valor] of unMapa) {
+          if (clave.length != 5) {
+            unMapa.delete(clave);
+          }
+        }
+      }
+      checkMap(mapa);
+      console.info(mapa);
+    </script>
+  </body>
+</html>

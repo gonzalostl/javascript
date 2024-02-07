@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let prmpt = window.prompt("indica la unidad en píxeles: ");
+      if (prmpt !== null) {
+        console.log("el susario pulsó aceptar en la introduccion de datos");
+        let cnfrm = window.confirm(`¿estas seguro de aplicar ${prmpt} px`);
+        if (cnfrm === false) {
+          console.log("El usuario no estaba seguro");
+        } else {
+          console.log("EL USUARIO ESTABA SEHURO");
+          window.resizeBy(prmpt, prmpt);
+          console.log(`Ventana redimensionada ${prmpt}x${prmpt}px`);
+        }
+      } else {
+        console.log("el usuario canceló la introduccion de datos");
+      }
+    </script>
+  </body>
+</html>

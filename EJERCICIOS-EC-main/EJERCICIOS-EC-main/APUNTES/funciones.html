@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1. Declaración de Funciones
+      function funcionDeclarada(parametro1, parametro2) {
+        // Código de la función
+        return resultado;
+      }
+
+      // 2. Expresiones de Funciones
+      const funcionExpresada = function (parametro1, parametro2) {
+        // Código de la función
+        return resultado;
+      };
+
+      // 3. Arrow Functions (Funciones Flecha)
+      const funcionFlecha = (parametro1, parametro2) => {
+        // Código de la función
+        return resultado;
+      };
+
+      // 4. Funciones Anónimas
+      const funcionAnonima = function (parametro1, parametro2) {
+        // Código de la función
+        return resultado;
+      };
+
+      // 5. Funciones como Métodos de Objetos
+      const objeto = {
+        metodo: function () {
+          // Código del método
+        },
+        otroMetodo() {
+          // Sintaxis corta para declarar métodos en ES6
+        },
+      };
+
+      // 6. Funciones como Callbacks
+      function operacion(callback) {
+        // Realizar alguna operación
+        callback();
+      }
+
+      operacion(function () {
+        // Función de callback
+      });
+
+      // 7. Funciones Recursivas
+      function factorial(n) {
+        if (n === 0 || n === 1) {
+          return 1;
+        } else {
+          return n * factorial(n - 1);
+        }
+      }
+
+      // 8. Funciones IIFE (Immediately Invoked Function Expression)
+      (function () {
+        // Código de la función
+      })();
+
+      // 9. Funciones con Cierre (Closures)
+      function generarContador() {
+        let contador = 0;
+
+        return function () {
+          contador++;
+          return contador;
+        };
+      }
+
+      const contador1 = generarContador();
+      console.log(contador1()); // 1
+      console.log(contador1()); // 2
+
+      // 10. Funciones Constructoras
+      function Persona(nombre, edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+      }
+
+      const persona1 = new Persona("Juan", 30);
+
+      // 11. Métodos de Funciones (Function Methods)
+      const cadena = "Hola, Mundo!";
+      const longitud = cadena.length; // Método de la función String
+
+      // 12. Funciones con Default Parameters
+      function saludar(nombre = "Invitado") {
+        console.log(`Hola, ${nombre}!`);
+      }
+
+      saludar(); // Hola, Invitado!
+      saludar("Juan"); // Hola, Juan!
+      // 1. Declaración de Funciones
+      function suma(a, b) {
+        return a + b;
+      }
+
+      // 2. Expresiones de Funciones
+      const resta = function (a, b) {
+        return a - b;
+      };
+
+      // 3. Arrow Functions (Funciones Flecha)
+      const multiplicacion = (a, b) => a * b;
+
+      // 4. Funciones Anónimas
+      const division = function (a, b) {
+        return a / b;
+      };
+
+      // 5. Funciones como Métodos de Objetos
+      const calculadora = {
+        sumar: function (a, b) {
+          return a + b;
+        },
+        restar(a, b) {
+          return a - b;
+        },
+      };
+
+      // 6. Funciones como Callbacks
+      function operacion(callback, a, b) {
+        const resultado = callback(a, b);
+        console.log(`El resultado es: ${resultado}`);
+      }
+
+      operacion(suma, 5, 3); // El resultado es: 8
+
+      // 7. Funciones Recursivas
+      function factorial(n) {
+        if (n === 0 || n === 1) {
+          return 1;
+        } else {
+          return n * factorial(n - 1);
+        }
+      }
+
+      console.log(factorial(5)); // 120
+
+      // 8. Funciones IIFE (Immediately Invoked Function Expression)
+      (function () {
+        console.log("Esta función se ejecuta inmediatamente.");
+      })();
+
+      // 9. Funciones con Cierre (Closures)
+      function contador() {
+        let count = 0;
+        return function () {
+          count++;
+          console.log(count);
+        };
+      }
+
+      const incrementar = contador();
+      incrementar(); // 1
+      incrementar(); // 2
+
+      // 10. Funciones Constructoras
+      function Persona(nombre, edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+      }
+
+      const persona1 = new Persona("Juan", 30);
+      console.log(persona1); // { nombre: 'Juan', edad: 30 }
+
+      // 11. Métodos de Funciones (Function Methods)
+      const texto = "Hola, Mundo!";
+      console.log(texto.length); // 12
+
+      // 12. Funciones con Default Parameters
+      function saludar(nombre = "Invitado") {
+        console.log(`Hola, ${nombre}!`);
+      }
+
+      saludar(); // Hola, Invitado!
+      saludar("Juan"); // Hola, Juan!
+    </script>
+  </body>
+</html>

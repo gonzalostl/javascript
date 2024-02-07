@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fragmento HTML</title>
+  </head>
+  <body>
+    <p>Párrafo 1</p>
+    <p>Párrafo 2</p>
+    <p>Párrafo 3</p>
+    <p>Párrafo 4</p>
+    <p>Párrafo 5</p>
+
+    <script>
+      // Obtener el penúltimo párrafo
+      var parrafos = document.querySelectorAll("p");
+      var penultimoParrafo = parrafos[parrafos.length - 2];
+
+      // Mostrar en la consola el contenido del penúltimo párrafo
+      console.log(penultimoParrafo.textContent);
+    </script>
+  </body>
+</html>

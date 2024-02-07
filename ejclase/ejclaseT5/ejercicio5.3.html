@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+                    {
+              "usuario": "Juan123",
+              "correo": "juan123@example.com",
+              "edad": 28,
+              "direccion": {
+                "calle": "Calle Principal",
+                "ciudad": "Ciudad Ejemplo",
+                "pais": "País de Ejemplo"
+              },
+              "intereses": ["programación", "viajes", "lectura"]
+            }
+            const fs = require('fs');
+
+      // Leer el contenido del archivo JSON
+      const datosJson = fs.readFileSync('datos_api.json', 'utf-8');
+
+      // Convertir el contenido a un objeto JSON
+      const objetoJson = JSON.parse(datosJson);
+
+      // Recorrer el objeto y mostrar su contenido en la consola
+      for (const clave in objetoJson) {
+        if (Object.hasOwnProperty.call(objetoJson, clave)) {
+          const valor = objetoJson[clave];
+          console.log(`${clave}:`, valor);
+        }
+      }
+    </script>
+  </body>
+</html>

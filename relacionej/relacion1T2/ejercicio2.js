@@ -1,0 +1,1 @@
+document.write("Gonzalo \n3000€/mes")

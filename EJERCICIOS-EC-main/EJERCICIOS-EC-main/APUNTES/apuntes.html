@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //numero aleatorio entre el 1 y el 10
+      numero = parseInt(Math.random() * 10 + 1);
+      document.write("numero aleatorio entre el 1 y el 10: " + numero);
+      // Declaración de Funciones
+      function nombreDeLaFuncion(parametro1, parametro2) {
+        // Código de la función
+        return resultado;
+      }
+
+      // Expresiones de Funciones
+      const nombreDeLaFuncion = function (parametro1, parametro2) {
+        // Código de la función
+        return resultado;
+      };
+
+      // Arrow Functions (Funciones Flecha)
+      const nombreDeLaFuncion = (parametro1, parametro2) => {
+        // Código de la función
+        return resultado;
+      };
+
+      // Parámetros y Argumentos
+      function suma(a, b) {
+        return a + b;
+      }
+      let res = suma(3, 5); // resultado = 8
+
+      // Valores Predeterminados en Parámetros
+      function saludar(nombre = "Invitado") {
+        console.log(`Hola, ${nombre}!`);
+      }
+      saludar(); // Hola, Invitado!
+      saludar("Juan"); // Hola, Juan!
+
+      // Funciones como Expresiones
+      const multiplicar = function (a, b) {
+        return a * b;
+      };
+      let resul = multiplicar(2, 4); // resultado = 8
+
+      // Funciones Flecha y su Sintaxis Concisa
+      const suma = (a, b) => a + b;
+
+      // Funciones como Argumentos
+      function operacionMatematica(a, b, operacion) {
+        return operacion(a, b);
+      }
+      let result = operacionMatematica(5, 3, suma); // resultado = 8
+
+      // Clausuras (Closures)
+      function generarContador() {
+        let contador = 0;
+
+        return function () {
+          contador++;
+          return contador;
+        };
+      }
+      const contador1 = generarContador();
+      console.log(contador1()); // 1
+      console.log(contador1()); // 2
+
+      // Recursividad
+      function factorial(n) {
+        if (n === 0 || n === 1) {
+          return 1;
+        } else {
+          return n * factorial(n - 1);
+        }
+      }
+      let resultado = factorial(5); // resultado = 120
+      // Declaración de Funciones
+function nombreDeLaFuncion(parametro1, parametro2) {
+    // Código de la función
+    return resultado;
+}
+
+// Expresiones de Funciones
+const nombreDeLaFuncion = function(parametro1, parametro2) {
+    // Código de la función
+    return resultado;
+};
+
+// Arrow Functions (Funciones Flecha)
+const nombreDeLaFuncion = (parametro1, parametro2) => {
+    // Código de la función
+    return resultado;
+};
+
+// Parámetros y Argumentos
+function suma(a, b) {
+    return a + b;
+}
+const resultado = suma(3, 5); // resultado = 8
+
+// Valores Predeterminados en Parámetros
+function saludar(nombre = "Invitado") {
+    console.log(`Hola, ${nombre}!`);
+}
+saludar(); // Hola, Invitado!
+saludar("Juan"); // Hola, Juan!
+
+// Funciones como Expresiones
+const multiplicar = function(a, b) {
+    return a * b;
+};
+const resultado = multiplicar(2, 4); // resultado = 8
+
+// Funciones Flecha y su Sintaxis Concisa
+const suma = (a, b) => a + b;
+
+// Funciones como Argumentos
+function operacionMatematica(a, b, operacion) {
+    return operacion(a, b);
+}
+const resultado = operacionMatematica(5, 3, suma); // resultado = 8
+
+// Clausuras (Closures)
+function generarContador() {
+    let contador = 0;
+
+    return function() {
+        contador++;
+        return contador;
+    };
+}
+const contador1 = generarContador();
+console.log(contador1()); // 1
+console.log(contador1()); // 2
+
+// Recursividad
+function factorial(n) {
+    if (n === 0 || n === 1) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
+}
+const resultado = factorial(5); // resultado = 120
+
+// Objetos y Funciones
+const persona = {
+    nombre: "Juan",
+    edad: 30,
+    saludar: function() {
+        console.log(`Hola, soy ${this.nombre} y tengo ${this.edad} años.`);
+    }
+};
+persona.saludar(); // Hola, soy Juan y tengo 30 años.
+
+// Métodos de Funciones
+const cadena = "Hola, Mundo!";
+const longitud = cadena.length; // Método de la función String
+
+// Funciones de Flecha y el Objeto `arguments`
+function ejemplo() {
+    console.log(arguments);
+}
+ejemplo(1, "dos", true); // Muestra un objeto similar a un array con los argumentos
+
+// Operador Spread en Funciones
+function sumar(...numeros) {
+    return numeros.reduce((total, num) => total + num, 0);
+}
+const resultado = sumar(1, 2, 3, 4, 5); // resultado = 15
+
+// Funciones Callback
+function operacionAsincrona(callback) {
+    // Operación asincrónica
+    callback();
+}
+operacionAsincrona(function() {
+    console.log("La operación ha finalizado.");
+});
+
+// Funciones Promesa
+function operacionAsincrona() {
+    return new Promise((resolve, reject) => {
+        // Operación asincrónica
+        if (operacionExitosa) {
+            resolve(resultado);
+        } else {
+            reject(error);
+        }
+    });
+}
+operacionAsincrona()
+    .then(resultado => console.log(resultado))
+    .catch(error => console.error(error));
+
+// Async/Await con Funciones Asíncronas
+async function ejecutarOperacion() {
+    try {
+        const resultado = await operacionAsincrona();
+        console.log(resultado);
+    } catch (error) {
+        console.error(error);
+    }
+}
+ejecutarOperacion();
+
+    </script>
+  </body>
+</html>

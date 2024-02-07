@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class TelefonoMovil {
+        constructor(CPU, RAM, Almacenamiento, Ancho, Alto, numCamaras) {
+          this.CPU = CPU;
+          this.RAM = RAM;
+          this.Almacenamiento = Almacenamiento;
+          this.Ancho = Ancho;
+          this.Alto = Alto;
+          this.numCamaras = numCamaras;
+        }
+
+        toString() {
+          return `Teléfono Móvil:
+      - CPU: ${this.CPU}
+      - RAM: ${this.RAM} GB
+      - Almacenamiento: ${this.Almacenamiento} GB
+      - Dimensiones: ${this.Ancho}mm x ${this.Alto}mm
+      - Cámaras: ${this.numCamaras}`;
+        }
+      }
+
+      // Crear objetos TelefonoMovil con diferentes números de parámetros
+      const telefono1 = new TelefonoMovil("Snapdragon 865", 6, 128, 160, 75, 3);
+      const telefono2 = new TelefonoMovil("Exynos 990", 8, 256, 155, 70, 4);
+      const telefono3 = new TelefonoMovil("Apple A14 Bionic", 4, 64, 150, 75, 2);
+      const telefono4 = new TelefonoMovil("Kirin 980", 6, 128, 165, 80, 3);
+
+      // Mostrar la información de cada objeto
+      console.log(telefono1.toString());
+      console.log("\n" + telefono2.toString());
+      console.log("\n" + telefono3.toString());
+      console.log("\n" + telefono4.toString());
+    </script>
+  </body>
+</html>

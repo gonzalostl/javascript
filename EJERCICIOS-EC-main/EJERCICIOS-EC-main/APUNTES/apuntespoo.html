@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*Objetos:
+
+En JavaScript, todo es un objeto o puede ser tratado como un objeto.
+Un objeto es una colección de propiedades, y cada propiedad tiene un nombre y un valor.
+Clases:
+
+Aunque JavaScript no tiene clases en el sentido tradicional, se introdujo el concepto de clases en ECMAScript 6 (ES6).
+Las clases proporcionan un enfoque más claro y orientado a objetos para crear objetos y manejar la herencia.
+Constructor:
+
+Se utiliza un constructor para inicializar los objetos creados a partir de una clase.
+El constructor es un método especial llamado constructor en la clase.*/
+      class Persona {
+        constructor(nombre, edad) {
+          this.nombre = nombre;
+          this.edad = edad;
+        }
+      }
+
+      // Crear un objeto Persona
+      const persona1 = new Persona("Juan", 25);
+      /*Métodos:
+
+Los métodos son funciones dentro de una clase que realizan acciones específicas.
+Se definen utilizando la sintaxis de funciones dentro de la clase.*/
+      class Persona {
+        constructor(nombre, edad) {
+          this.nombre = nombre;
+          this.edad = edad;
+        }
+
+        saludar() {
+          console.log(`Hola, soy ${this.nombre} y tengo ${this.edad} años.`);
+        }
+      }
+
+      const persona1 = new Persona("Juan", 25);
+      persona1.saludar();
+      class Estudiante extends Persona {
+        constructor(nombre, edad, curso) {
+          super(nombre, edad);
+          this.curso = curso;
+        }
+
+        estudiar() {
+          console.log(`${this.nombre} está estudiando ${this.curso}.`);
+        }
+      }
+
+      const estudiante1 = new Estudiante("Ana", 20, "Matemáticas");
+      estudiante1.saludar();
+      estudiante1.estudiar();
+      /*En JavaScript, no hay modificadores de acceso como en otros lenguajes, pero se puede lograr encapsulamiento utilizando convenciones de nomenclatura y funciones internas.*/
+      class CuentaBancaria {
+        constructor(saldoInicial) {
+          let saldo = saldoInicial;
+
+          this.obtenerSaldo = function () {
+            return saldo;
+          };
+
+          this.depositar = function (cantidad) {
+            saldo += cantidad;
+          };
+
+          this.retirar = function (cantidad) {
+            if (cantidad <= saldo) {
+              saldo -= cantidad;
+            } else {
+              console.log("Fondos insuficientes");
+            }
+          };
+        }
+      }
+
+      const cuenta = new CuentaBancaria(1000);
+      console.log(cuenta.obtenerSaldo());
+      cuenta.depositar(500);
+      cuenta.retirar(200);
+      class Persona {
+        constructor(nombre, edad) {
+          this._nombre = nombre;
+          this._edad = edad;
+        }
+
+        // Getter para obtener el nombre
+        get nombre() {
+          return this._nombre;
+        }
+
+        // Setter para establecer el nombre
+        set nombre(nuevoNombre) {
+          this._nombre = nuevoNombre;
+        }
+
+        // Getter para obtener la edad
+        get edad() {
+          return this._edad;
+        }
+
+        // Setter para establecer la edad
+        set edad(nuevaEdad) {
+          if (nuevaEdad > 0) {
+            this._edad = nuevaEdad;
+          } else {
+            console.log("La edad debe ser un número positivo.");
+          }
+        }
+      }
+
+      const persona1 = new Persona("Juan", 25);
+
+      // Utilizando getters
+      console.log(persona1.nombre); // Salida: Juan
+      console.log(persona1.edad); // Salida: 25
+
+      // Utilizando setters
+      persona1.nombre = "Carlos";
+      persona1.edad = 30;
+
+      console.log(persona1.nombre); // Salida: Carlos
+      console.log(persona1.edad); // Salida: 30
+      class Animal {
+        constructor(nombre) {
+          this._nombre = nombre;
+        }
+
+        get nombre() {
+          return this._nombre;
+        }
+
+        set nombre(nuevoNombre) {
+          this._nombre = nuevoNombre;
+        }
+      }
+
+      class Perro extends Animal {
+        constructor(nombre, raza) {
+          super(nombre);
+          this._raza = raza;
+        }
+
+        // Getter específico para la raza
+        get raza() {
+          return this._raza;
+        }
+
+        // Setter específico para la raza
+        set raza(nuevaRaza) {
+          this._raza = nuevaRaza;
+        }
+      }
+
+      const perro1 = new Perro("Max", "Labrador");
+
+      console.log(perro1.nombre); // Salida: Max
+      console.log(perro1.raza); // Salida: Labrador
+
+      perro1.nombre = "Buddy";
+      perro1.raza = "Golden Retriever";
+
+      console.log(perro1.nombre); // Salida: Buddy
+      console.log(perro1.raza); // Salida: Golden Retriever
+    </script>
+  </body>
+</html>
