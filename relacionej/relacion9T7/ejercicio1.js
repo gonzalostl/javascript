@@ -3,57 +3,34 @@ y en función de la tecla numérica que se pulse(0, 1, 2, 3, 4, 5, 6, 7, 8, 9) d
 imagen en el contenedor. Cuando se pulse otro número, debe vaciarse el contenedor y cargarse de nuevo
 su imagen correspondiente*/
 
-document.addEventListener("DOMContentLoaded", function () {
-  document.addEventListener("key", function (event) {
-    const tecla = event.key;
+const imagenes = {
+  0: "img/auto1.jpg",
+  1: "img/auto2.jpg",
+  2: "img/auto3.jpg",
+  3: "img/auto4.jpg",
+  4: "img/auto5.jpg",
+  5: "img/auto6.jpg",
+  6: "img/auto7.jpg",
+  7: "img/auto8.jpg",
+  8: "img/auto9.jpg",
+  9: "img/auto10.jpg",
+};
 
-    const contenedorImagen = document.getElementById("imagenContenedor");
+function cambiarImagen(tecla) {
+  const contenedor = document.getElementById("imagenContainer");
+  contenedor.innerHTML = "";
 
-    contenedorImagen.innerHTML = "";
-
-    switch (tecla) {
-      case "0":
-        agregarImagen("img/auto1.jpg");
-        break;
-      case "1":
-        agregarImagen("img/auto2.jpg");
-        break;
-      case "2":
-        agregarImagen("img/auto3.jpg");
-        break;
-      case "3":
-        agregarImagen("img/auto4.jpg");
-        break;
-      case "4":
-        agregarImagen("img/auto5.jpg");
-        break;
-      case "5":
-        agregarImagen("img/auto6.jpg");
-        break;
-      case "6":
-        agregarImagen("img/auto7.jpg");
-        break;
-      case "7":
-        agregarImagen("img/auto8.jpg");
-        break;
-      case "8":
-        agregarImagen("img/auto9.jpg");
-        break;
-      case "9":
-        agregarImagen("img/auto10.jpg");
-        break;
-      default:
-        break;
-    }
-  });
-
-  function agregarImagen(ruta) {
+  if (tecla in imagenes) {
+    const imagenSrc = imagenes[tecla];
     const imagen = document.createElement("img");
+    imagen.src = imagenSrc;
+    contenedor.appendChild(imagen);
+  }
+}
+document.addEventListener("keydown", function (event) {
+  const teclaPresionada = event.key;
 
-    imagen.src = ruta;
-
-    const contenedorImagen = document.getElementById("imagenContenedor");
-
-    contenedorImagen.appendChild(imagen);
+  if (/[0-9]/.test(teclaPresionada)) {
+    cambiarImagen(teclaPresionada);
   }
 });
