@@ -9,12 +9,10 @@ function ordenarDesordenarLista() {
   var confirmacion = confirm("¿Quieres ordenar la lista?");
 
   if (confirmacion) {
-    // Ordenar alfabéticamente
     elementos.sort(function (a, b) {
       return a.textContent.localeCompare(b.textContent);
     });
   } else {
-    // Desordenar aleatoriamente
     elementos.sort(function () {
       return Math.random() - 0.5;
     });
