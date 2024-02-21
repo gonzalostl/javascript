@@ -1,0 +1,17 @@
+{
+  "vehiculo": {
+    "marca": "Ferrari",
+    "modelo": "F40",
+    "numero_bastidor": "1234567890ABCDEF",
+    "cilindrada": 4497,
+    "numero_puertas": 2,
+    "color": "Rojo"
+  },
+  "propietario": {
+    "nombre": "Gonzalo",
+    "apellidos": "Sánchez de Toro López",
+    "direccion": "Calle Gatona 12",
+    "telefono": "611-45-15-16",
+    "correo_electronico": "gsanlop705@g.educaand.es"
+  }
+}
