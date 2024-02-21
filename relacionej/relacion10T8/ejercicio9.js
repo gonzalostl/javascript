@@ -1,64 +1,61 @@
-function guardarInformacion() {
-  // Información a almacenar
-  var informacion = {
-    vehiculo: {
-      marca: "Ferrari",
-      modelo: "F40",
-      numero_bastidor: "1234567890ABCDEF",
-      cilindrada: 4497,
-      numero_puertas: 2,
-      color: "Rojo",
-    },
-    propietario: {
-      nombre: "Gonzalo",
-      apellidos: "Sánchez de Toro López",
-      direccion: "Calle Gatona 12",
-      telefono: "611-45-15-16",
-      correo_electronico: "gsanlop705@g.educaand.es",
-    },
-  };
+let vehicleInfo = {
+  vehiculo: {
+    marca: "Ferrari",
+    modelo: "F40",
+    numero_bastidor: "1234567890ABCDEF",
+    cilindrada: 4497,
+    numero_puertas: 2,
+    color: "Rojo",
+  },
+  propietario: {
+    nombre: "Gonzalo",
+    apellidos: "Sánchez de Toro López",
+    direccion: "Calle Gatona 12",
+    telefono: "611-45-15-16",
+    correo_electronico: "gsanlop705@g.educaand.es",
+  },
+};
 
-  // Convertir a JSON y almacenar en sessionStorage
-  sessionStorage.setItem("informacion", JSON.stringify(informacion));
-  alert("Información guardada exitosamente.");
-}
+localStorage.setItem("vehicleInfo", JSON.stringify(vehicleInfo));
 
-function mostrarInformacion() {
-  // Obtener la información almacenada en sessionStorage
-  var informacionGuardada = sessionStorage.getItem("informacion");
+let storedVehicleInfo = JSON.parse(localStorage.getItem("vehicleInfo"));
+let vehicleDataContainer = document.getElementById("vehicleData");
+let html = "<p><strong>Marca:</strong> " + storedVehicleInfo.marca + "</p>";
+html += "<p><strong>Modelo:</strong> " + storedVehicleInfo.modelo + "</p>";
+html +=
+  "<p><strong>Número de bastidor:</strong> " +
+  storedVehicleInfo.numero_bastidor +
+  "</p>";
+html +=
+  "<p><strong>Cilindrada:</strong> " + storedVehicleInfo.cilindrada + "</p>";
+html +=
+  "<p><strong>Número de puertas:</strong> " +
+  storedVehicleInfo.numero_puertas +
+  "</p>";
+html += "<p><strong>Color:</strong> " + storedVehicleInfo.color + "</p>";
+html += "<h2>Datos del propietario</h2>";
+html +=
+  "<p><strong>Nombre:</strong> " +
+  storedVehicleInfo.propietario.nombre +
+  "</p>";
+html +=
+  "<p><strong>Apellidos:</strong> " +
+  storedVehicleInfo.propietario.apellidos +
+  "</p>";
+html +=
+  "<p><strong>Dirección:</strong> " +
+  storedVehicleInfo.propietario.direccion +
+  "</p>";
+html +=
+  "<p><strong>Teléfono:</strong> " +
+  storedVehicleInfo.propietario.telefono +
+  "</p>";
+html +=
+  "<p><strong>Correo:</strong> " +
+  storedVehicleInfo.propietario.correo +
+  "</p>";
+vehicleDataContainer.innerHTML = html;
 
-  if (informacionGuardada) {
-    // Convertir de JSON a objeto
-    var informacion = JSON.parse(informacionGuardada);
-
-    // Mostrar la información en formato HTML
-    var resultadoHTML = "<p><strong>Vehículo:</strong><br>";
-    resultadoHTML += "Marca: " + informacion.vehiculo.marca + "<br>";
-    resultadoHTML += "Modelo: " + informacion.vehiculo.modelo + "<br>";
-    resultadoHTML +=
-      "Número de bastidor: " + informacion.vehiculo.numero_bastidor + "<br>";
-    resultadoHTML += "Cilindrada: " + informacion.vehiculo.cilindrada + "<br>";
-    resultadoHTML +=
-      "Número de puertas: " + informacion.vehiculo.numero_puertas + "<br>";
-    resultadoHTML += "Color: " + informacion.vehiculo.color + "<br></p>";
-
-    resultadoHTML += "<p><strong>Propietario:</strong><br>";
-    resultadoHTML += "Nombre: " + informacion.propietario.nombre + "<br>";
-    resultadoHTML += "Apellidos: " + informacion.propietario.apellidos + "<br>";
-    resultadoHTML += "Dirección: " + informacion.propietario.direccion + "<br>";
-    resultadoHTML += "Teléfono: " + informacion.propietario.telefono + "<br>";
-    resultadoHTML +=
-      "Correo electrónico: " +
-      informacion.propietario.correo_electronico +
-      "<br></p>";
-
-    document.body.innerHTML += resultadoHTML;
-  } else {
-    alert("No hay información almacenada.");
-  }
-}
-
-// Limpiar sessionStorage al cerrar el navegador
 window.addEventListener("beforeunload", function () {
-  sessionStorage.removeItem("informacion");
+  localStorage.removeItem("vehicleInfo");
 });
