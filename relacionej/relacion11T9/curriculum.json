@@ -1,0 +1,35 @@
+{
+  "nombre": "Gonzalo Sánchez de Toro López",
+  "titulo": "Desarrollador Web",
+  "resumen": "Desarrollador web con conocimientos en tecnologías frontend y backend. Pero especializado en frontend",
+  "experiencia": [
+    {
+      "puesto": "Desarrollador FrontEnd",
+      "empresa": "AT Sistemas",
+      "periodo": "Julio 2022 - Presente",
+      "descripcion": "Desarrollo, diseño y mantenimiento de aplicaciones web utilizando JavaScript, CSS, React, Bootstrap y MySQL."
+    },
+    {
+      "puesto": "Desarrollador Junior",
+      "empresa": "Cuisine Digital",
+      "periodo": "Enero 2019 - Mayo 2022",
+      "descripcion": "Realización de proyectos de desarrollo web frontend con HTML, CSS y JavaScript."
+    }
+  ],
+  "educacion": [
+    {
+      "titulo": "Grado en Desarrolo  de Aplicaciones Web",
+      "institucion": "Ies Mar de Cdiz",
+      "periodo": "2017 - 2019"
+    }
+  ],
+  "habilidades": [
+    "JavaScript",
+    "HTML5",
+    "CSS3",
+    "React",
+    "SQL",
+    "Git",
+    "Docker"
+  ]
+}
