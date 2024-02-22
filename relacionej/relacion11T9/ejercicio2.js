@@ -3,7 +3,9 @@ function DOMCargado() {
     if (document.readyState === "loading") {
       document.getElementById("mensaje").innerText = "CARGANDO";
       document.addEventListener("DOMContentLoaded", () => {
-        resolve();
+        setTimeout(() => {
+          resolve();
+        }, 3000);
       });
     } else {
       resolve();
