@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ejercicio8</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+      }
+      .product {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+      }
+      .product img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Productos de Café</h1>
+    <div class="grid" id="productGrid"></div>
+
+    <script src="ejercicio8.js"></script>
+  </body>
+</html>
