@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      margin-top: 150px;
+      margin-left: 200px;
+    }
+    #lienzo {
+      border-style: solid;
+    }
+  </style>
+  <body>
+    <canvas id="lienzo" width="500px" height="500px"></canvas>
+    <script>
+      function logomitsubishi() {
+        let lienzo = document.getElementById("lienzo");
+        if (lienzo.getContext) {
+          let rombo = lienzo.getContext("2d");
+
+          rombo.lineWidth = 5;
+
+          rombo.strokeStyle = "rgb(255, 0, 0)";
+
+          rombo.fillStyle = "rgb(255, 0, 0)";
+
+          rombo.beginPath();
+
+          rombo.moveTo(250, 35);
+
+          rombo.lineTo(300, 115);
+
+          rombo.lineTo(250, 200);
+
+          rombo.lineTo(200, 115);
+
+          rombo.closePath();
+
+          rombo.stroke();
+
+          rombo.fill();
+        }
+      }
+      logomitsubishi();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      margin-top: 150px;
+      margin-left: 200px;
+    }
+    #lienzo {
+      border-style: solid;
+    }
+  </style>
+  <body>
+    <canvas id="lienzo" width="500px" height="500px"></canvas>
+    <script>
+      function draw() {
+        const lienzo = document.getElementById("lienzo");
+        if (lienzo.getContext) {
+          const ctx = lienzo.getContext("2d");
+
+          ctx.beginPath();
+          ctx.arc(115, 115, 80, 30, Math.PI * 2, true); // Círculo externo
+          ctx.lineWidth = 5;
+          ctx.strokeStyle = "red";
+          ctx.stroke();
+
+          const circle = new Path2D();
+          circle.arc(250, 75, 55, 0, 2 * Math.PI);
+          ctx.fillStyle = "red";
+          ctx.fill(circle);
+        }
+      }
+      draw();
+    </script>
+  </body>
+</html>
