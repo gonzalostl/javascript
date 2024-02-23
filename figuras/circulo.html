@@ -34,30 +34,27 @@
           ctx.fill(circle);
         }*/
       function draw() {
-        const canvas = document.getElementById("canvas");
-        if (canvas.getContext) {
-          const ctx = canvas.getContext("2d");
-
-          for (let i = 0; i < 4; i++) {
-            for (let j = 0; j < 1; j++) {
-              ctx.beginPath();
-              const x = 50 + j * 50; // Coordenada x
-              const y = 50 + i * 50; // Coordenada y
-              const radius = 20; // Radio del Arco
-              const startAngle = 0; // Punto inicial del Círculo
-              const endAngle = Math.PI + (Math.PI * j) / 2; // Punto final del Círculo
-              const counterclockwise = i % 2 !== 0; // En el sentido de las agujas del reloj o en sentido contrario
-
-              ctx.arc(x, y, radius, startAngle, endAngle, counterclockwise);
-
-              if (i > 1) {
-                ctx.fill();
-              } else {
-                ctx.stroke();
-              }
-            }
-          }
-        }
+        const contexto = canvas.getContext("2d");
+        contexto.lineWidth = 5;
+        // Color de línea
+        contexto.strokeStyle = "black";
+        // Color de relleno
+        contexto.fillStyle = "black";
+        // Las variables indican el nombre de cada argumento para
+        // la función arc
+        let x = 100,
+          y = 100,
+          radio = 50,
+          anguloInicio = Math.PI,
+          anguloFin = Math.PI * 2;
+        contexto.arc(x, y, radio, anguloInicio, anguloFin);
+        // Una línea para la mitad del círculo, opcional
+        contexto.moveTo(x - radio - 2, y);
+        contexto.lineTo(x + radio + 2, y);
+        // Hacemos que se dibuje
+        contexto.stroke();
+        // Lo rellenamos
+        contexto.fill();
       }
       draw();
     </script>
