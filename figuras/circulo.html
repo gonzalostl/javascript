@@ -10,16 +10,16 @@
       margin-top: 150px;
       margin-left: 200px;
     }
-    #lienzo {
+    #canvas {
       border-style: solid;
     }
   </style>
   <body>
-    <canvas id="lienzo" width="500px" height="500px"></canvas>
+    <canvas id="canvas" width="500px" height="500px"></canvas>
     <script>
-      function draw() {
+      /*function draw() {
         const lienzo = document.getElementById("lienzo");
-        if (lienzo.getContext) {
+         if (lienzo.getContext) {
           const ctx = lienzo.getContext("2d");
 
           ctx.beginPath();
@@ -32,6 +32,31 @@
           circle.arc(250, 75, 55, 0, 2 * Math.PI);
           ctx.fillStyle = "red";
           ctx.fill(circle);
+        }*/
+      function draw() {
+        const canvas = document.getElementById("canvas");
+        if (canvas.getContext) {
+          const ctx = canvas.getContext("2d");
+
+          for (let i = 0; i < 4; i++) {
+            for (let j = 0; j < 1; j++) {
+              ctx.beginPath();
+              const x = 50 + j * 50; // Coordenada x
+              const y = 50 + i * 50; // Coordenada y
+              const radius = 20; // Radio del Arco
+              const startAngle = 0; // Punto inicial del Círculo
+              const endAngle = Math.PI + (Math.PI * j) / 2; // Punto final del Círculo
+              const counterclockwise = i % 2 !== 0; // En el sentido de las agujas del reloj o en sentido contrario
+
+              ctx.arc(x, y, radius, startAngle, endAngle, counterclockwise);
+
+              if (i > 1) {
+                ctx.fill();
+              } else {
+                ctx.stroke();
+              }
+            }
+          }
         }
       }
       draw();
