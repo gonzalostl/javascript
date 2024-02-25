@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       resultsDiv.innerHTML = "<p>No se encontraron resultados</p>";
       return;
     }
-    const slicedItems = items.slice(0, 3); // Obtener los tres primeros resultados
+    const slicedItems = items.slice(0, 3);
     const resultsHTML = slicedItems
       .map(
         (item) => `
