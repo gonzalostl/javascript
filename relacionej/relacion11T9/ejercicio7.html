@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -17,5 +18,76 @@
     <div id="results"></div>
 
     <script src="ejercicio7.js"></script>
+  </body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Candidatos</title>
+    <style>
+      /* Estilos opcionales para mejorar la apariencia */
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+      }
+      button {
+        padding: 10px;
+        margin: 10px;
+        cursor: pointer;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 50%;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Candidatos para la posición</h1>
+
+    <div id="candidatos"></div>
+
+    <script>
+      async function obtenerCandidatos() {
+        try {
+          const response = await fetch("https://randomuser.me/api/?results=3");
+          const data = await response.json();
+          return data.results;
+        } catch (error) {
+          console.error("Error al obtener candidatos:", error);
+        }
+      }
+
+      function mostrarInformacionCandidato(candidato) {
+        const candidatoDiv = document.getElementById("candidatos");
+        candidatoDiv.innerHTML = `
+                <h2>${candidato.name.first} ${candidato.name.last}</h2>
+                <p>Edad: ${candidato.dob.age}</p>
+                <p>Género: ${candidato.gender}</p>
+                <p>Email: ${candidato.email}</p>
+                <p>Teléfono: ${candidato.phone}</p>
+                <p>Ciudad: ${candidato.location.city}</p>
+                <img src="${candidato.picture.large}" alt="Foto de ${candidato.name.first}">
+            `;
+      }
+
+      async function cargarCandidatos() {
+        const candidatos = await obtenerCandidatos();
+
+        candidatos.forEach((candidato, index) => {
+          const boton = document.createElement("button");
+          boton.textContent = `Candidato ${index + 1}`;
+          boton.addEventListener("click", () => mostrarInformacionCandidato(candidato));
+          document.body.appendChild(boton);
+        });
+      }
+
+      cargarCandidatos();
+    </script>
   </body>
 </html>

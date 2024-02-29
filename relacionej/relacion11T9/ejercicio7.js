@@ -22,8 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch((error) => {
         console.error("Error al buscar:", error);
-        resultsDiv.innerHTML =
-          "<p>Error al buscar. Intentalo de nuevo más tarde.</p>";
+        resultsDiv.innerHTML = "<p>Error al buscar. Intentalo de nuevo más tarde.</p>";
       });
   }
 
