@@ -22,9 +22,27 @@
         if (canvas.getContext) {
           const ctx = canvas.getContext("2d");
           ctx.fillStyle = "black";
-          ctx.fillRect(150, 150, 190, 190);
 
-          ctx.fillRect(25, 25, 100, 40);
+          ctx.fillRect(50, 25, 100, 40);
+
+          // Color de relleno
+          ctx.fillStyle = "black";
+          // Comenzamos la ruta de dibujo, o path
+          ctx.beginPath();
+          // Mover a la esquina superior izquierda
+          ctx.moveTo(220, 205);
+          // Dibujar la línea hacia la derecha
+          ctx.lineTo(280, 205);
+          // Ahora la que va hacia abajo
+          ctx.lineTo(260, 280); // A 80 porque esa es la altura
+          // La que va hacia la izquierda
+          ctx.lineTo(235, 280);
+          // Y dejamos que la última línea la dibuje JS
+          ctx.closePath();
+          // Hacemos que se dibuje
+          ctx.stroke();
+          // Lo rellenamos
+          ctx.fill();
         }
       }
       draw();
