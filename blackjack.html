@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blackjack</title>
+    <style>
+      /* Estilos CSS para el juego */
+      #jugador,
+      #dealer {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Blackjack</h1>
+
+    <div id="jugador">
+      <p>Jugador:</p>
+      <span id="cartas-jugador"></span>
+      <p id="puntos-jugador">Puntos: 0</p>
+    </div>
+
+    <div id="dealer">
+      <p>Dealer:</p>
+      <span id="cartas-dealer"></span>
+      <p id="puntos-dealer">Puntos: 0</p>
+    </div>
+
+    <button id="nueva-partida">Nueva Partida</button>
+    <button id="pedir-carta">Pedir Carta</button>
+    <button id="terminar-turno">Terminar Turno</button>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var cartas = [
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "J",
+          "Q",
+          "K",
+          "A",
+        ];
+        var jugadorCartas = [];
+        var dealerCartas = [];
+        var jugadorPuntos = 0;
+        var dealerPuntos = 0;
+
+        function actualizarInterfaz() {
+          document.getElementById("cartas-jugador").textContent =
+            jugadorCartas.join(", ");
+          document.getElementById("puntos-jugador").textContent =
+            "Puntos: " + jugadorPuntos;
+
+          document.getElementById("cartas-dealer").textContent =
+            dealerCartas.join(", ");
+          document.getElementById("puntos-dealer").textContent =
+            "Puntos: " + dealerPuntos;
+        }
+
+        function nuevaPartida() {
+          jugadorCartas = [];
+          dealerCartas = [];
+          jugadorPuntos = 0;
+          dealerPuntos = 0;
+
+          for (let i = 0; i < 2; i++) {
+            pedirCarta(jugadorCartas, "puntos-jugador");
+            pedirCarta(dealerCartas, "puntos-dealer");
+          }
+
+          habilitarBotones(false, true, true);
+        }
+
+        function pedirCarta(participanteCartas, puntosId) {
+          var carta = cartas[Math.floor(Math.random() * cartas.length)];
+          participanteCartas.push(carta);
+
+          var puntos = calcularPuntos(participanteCartas);
+          document.getElementById(puntosId).textContent = "Puntos: " + puntos;
+
+          if (puntos > 21) {
+            terminarTurno();
+          }
+        }
+
+        function calcularPuntos(participanteCartas) {
+          var puntos = 0;
+          var asContador = 0;
+
+          for (let carta of participanteCartas) {
+            if (carta === "A") {
+              puntos += 11;
+              asContador++;
+            } else if (carta === "K" || carta === "Q" || carta === "J") {
+              puntos += 10;
+            } else {
+              puntos += parseInt(carta);
+            }
+          }
+
+          while (asContador > 0 && puntos > 21) {
+            puntos -= 10;
+            asContador--;
+          }
+
+          return puntos;
+        }
+
+        function terminarTurno() {
+          habilitarBotones(true, false, false);
+
+          while (calcularPuntos(dealerCartas) < 17) {
+            pedirCarta(dealerCartas, "puntos-dealer");
+          }
+
+          if (
+            calcularPuntos(jugadorCartas) > 21 ||
+            (calcularPuntos(dealerCartas) <= 21 &&
+              calcularPuntos(dealerCartas) >= calcularPuntos(jugadorCartas))
+          ) {
+            alert("¡El dealer gana!");
+          } else {
+            alert("¡Felicidades, ganaste!");
+          }
+        }
+
+        function habilitarBotones(nuevaPartida, pedirCarta, terminarTurno) {
+          document.getElementById("nueva-partida").disabled = !nuevaPartida;
+          document.getElementById("pedir-carta").disabled = !pedirCarta;
+          document.getElementById("terminar-turno").disabled = !terminarTurno;
+        }
+
+        document
+          .getElementById("nueva-partida")
+          .addEventListener("click", function () {
+            nuevaPartida();
+            habilitarBotones(false, true, true);
+          });
+
+        document
+          .getElementById("pedir-carta")
+          .addEventListener("click", function () {
+            pedirCarta(jugadorCartas, "puntos-jugador");
+          });
+
+        document
+          .getElementById("terminar-turno")
+          .addEventListener("click", function () {
+            terminarTurno();
+          });
+
+        nuevaPartida();
+      });
+    </script>
+  </body>
+</html>
