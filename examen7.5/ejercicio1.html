@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1</title>
+    <script src="ejercicio1.js"></script>
+</head>
+<style>
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        background-image: url(cartas/tapete.jpg);
+        background-size: cover;
+    }
+
+    #juegoJugador {
+        display: flex;
+    }
+
+    h3 {
+        color: white;
+    }
+</style>
+
+<body>
+    <div>
+        <div><img id="pedirCarta" src="cartas/trasera_jug.jpg" alt=""></div>
+        <div>
+            <h3>Cartas Jugador</h3>
+            <div id="juegoJugador"></div>
+        </div>
+        <br>
+        <div>
+            <h3>Cartas Banca</h3>
+            <div id="juegoBanca"></div>
+        </div>
+    </div>
+
+    <button id="btnPlantarse">Plantarse</button>
+
+    <div id="medalla"></div>
+</body>
+
+</html>
