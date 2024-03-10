@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Ahorcado</title>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        //======================================================================
+        // VARIABLES
+        //======================================================================
+
+        let listaPalabras = [];
+        let palabraAdivinar = [];
+        let palabraMostrar = [];
+        let historialLetrasUsuario = [];
+        let numIntentos = 5;
+        let nodoLetra = document.querySelector("#letra");
+        let nodoBoton = document.querySelector("#boton");
+        let nodoComprobarPalabra = document.querySelector("#comprobarPalabra");
+        let nodoAyuda = document.querySelector("#ayuda");
+        let nodoResultado = document.querySelector("#resultado");
+        let nodoIntentos = document.querySelector("#intentos");
+        let nodoHistorial = document.querySelector("#letrasfallidas");
+
+        //======================================================================
+        // FUNCIONES
+        //======================================================================
+        document.addEventListener("keydown", function (event) {
+          if (event.key == "f") {
+            location.reload();
+          }
+        });
+
+        // Función cookie de si ha ganado o perdido
+        function ResultadoCookie(resultado) {
+          let fechaExpiracion = new Date();
+          fechaExpiracion.setTime(fechaExpiracion.getTime() + 8 * 60 * 1000); // 8 minutos
+          document.cookie =
+            "resultado=" +
+            resultado +
+            ";expires=" +
+            fechaExpiracion.toUTCString() +
+            ";path=/";
+        }
+
+        // Función para obtener el valor de la cookie
+        function getResultadoCookie() {
+          let nombreCookie = "resultado=";
+          let cookies = document.cookie.split(";");
+
+          for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+
+            if (cookie.indexOf(nombreCookie) == 0) {
+              return cookie.substring(nombreCookie.length, cookie.length);
+            }
+          }
+          return "";
+        }
+
+        function prepararJuego() {
+          // Pide al usuario que introduzca las palabras
+          let inputPalabras = prompt(
+            "Introduce 10 palabras separadas por comas:"
+          );
+          listaPalabras = inputPalabras.split(",");
+
+          //palabra aleatoria
+          let posAleatoriaListaPalabras = _.random(listaPalabras.length - 1);
+
+          let palabraAleatoria = listaPalabras[posAleatoriaListaPalabras];
+
+          // Muestra la palabra elegida por consola
+          console.log("Palabra :", palabraAleatoria);
+
+          //separo en letras
+          palabraAdivinar = palabraAleatoria.split("");
+          //guiones palabra
+          for (let letra of palabraAdivinar) {
+            palabraMostrar.push("_");
+          }
+          //muestra por pantalla
+          mostrarJuego();
+        }
+
+        function mostrarJuego() {
+          // Muestra el resultado
+          nodoResultado.textContent = palabraMostrar.join(" ");
+          // Muestra los intentos
+          nodoIntentos.textContent = numIntentos;
+          // Muestra letras fallidas
+          nodoHistorial.textContent = historialLetrasUsuario.join(" ");
+        }
+
+        function comprobarLetraUsuario() {
+          //guardo al letra
+          let letraUsuario = nodoLetra.value;
+
+          nodoLetra.value = "";
+          nodoLetra.focus();
+
+          // Recorro las letras para saber si hay alguna correcta
+          for (const [posicion, letraAdivinar] of palabraAdivinar.entries()) {
+            if (letraUsuario == letraAdivinar) {
+              // Sustituyo el guion por la letra acertada
+              palabraMostrar[posicion] = letraAdivinar;
+            }
+          }
+
+          // si es letra incorrecta
+          if (!palabraAdivinar.includes(letraUsuario)) {
+            // Resto un intento
+            numIntentos -= 1;
+            // Guardo en letras fallidas la letra pulsada
+            historialLetrasUsuario.push(letraUsuario);
+          }
+
+          acabarJuego();
+
+          mostrarJuego();
+        }
+
+        function comprobarPalabraUsuario() {
+          let palabraUsuario = prompt("Introduce la palabra:");
+
+          if (
+            palabraUsuario.toLowerCase() ===
+            palabraAdivinar.join("").toLowerCase()
+          ) {
+            alert("¡Enhorabuena!");
+            location.reload(true);
+          } else {
+            alert("Palabra incorrecta. Puedes seguir jugando.");
+          }
+        }
+
+        function comprobarPulsadoEnter(evento) {
+          if (evento.code == "Enter") {
+            comprobarLetraUsuario();
+          }
+        }
+
+        function comprobarPulsadoEnter(evento) {
+          if (evento.code == "Enter") {
+            comprobarLetraUsuario();
+          }
+        }
+
+        // funcion para obtener pisya y restar dos intentos
+        function obtenerAyuda() {
+          const letrasRepetidas = contarLetrasRepetidas();
+          const letraMasRepetida = obtenerLetraMasRepetida(letrasRepetidas);
+
+          if (letraMasRepetida) {
+            // Restar dos intentos
+            numIntentos -= 2;
+            // Mostrar alerta con la letra de ayuda
+            alert(
+              "Pista: La letra más repetida es '" +
+                letraMasRepetida +
+                "'. Se restan 2 intentos."
+            );
+            // Actualizar el juego
+            mostrarJuego();
+          }
+        }
+
+        function contarLetrasRepetidas() {
+          let letrasRepetidas = {};
+          for (let letra of palabraAdivinar) {
+            if (letrasRepetidas[letra]) {
+              letrasRepetidas[letra]++;
+            } else {
+              letrasRepetidas[letra] = 1;
+            }
+          }
+          return letrasRepetidas;
+        }
+
+        function obtenerLetraMasRepetida(letrasRepetidas) {
+          let maxRepetidas = 0;
+          let letraMasRepetida = null;
+
+          for (let letra in letrasRepetidas) {
+            if (letrasRepetidas.hasOwnProperty(letra)) {
+              if (letrasRepetidas[letra] > maxRepetidas) {
+                maxRepetidas = letrasRepetidas[letra];
+                letraMasRepetida = letra;
+              }
+            }
+          }
+
+          return letraMasRepetida;
+        }
+
+        //funcion para ver si el juego ha finalizado
+        function acabarJuego() {
+          if (!palabraMostrar.includes("_")) {
+            alert("¡Enhorabuena!");
+            ResultadoCookie("ganado");
+            location.reload(true);
+          }
+
+          if (numIntentos == 0) {
+            alert(
+              "¡Animo para la siguiente! La palabra era: " +
+                palabraAdivinar.join("")
+            );
+            ResultadoCookie("perdido");
+            location.reload(true);
+          }
+        }
+
+        //======================================================================
+        // EVENTOS
+        //======================================================================
+        // Al hacer clic en el boton y enter se llama la funcion comprobarLetraUsuario
+        nodoBoton.addEventListener("click", comprobarLetraUsuario);
+        nodoLetra.addEventListener("keyup", comprobarPulsadoEnter);
+
+        //comprueba la plabra
+        nodoComprobarPalabra.addEventListener("click", comprobarPalabraUsuario);
+        //Doble click boton ayuda
+        nodoAyuda.addEventListener("dblclick", obtenerAyuda);
+
+        //======================================================================
+        // INICIO
+        //======================================================================
+        prepararJuego();
+      });
+    </script>
+  </head>
+  <body>
+    <input id="letra" type="text" placeholder="Dame una letra" maxlength="1" />
+    <button id="boton">Comprobar</button>
+    <button id="comprobarPalabra">Comprobar palabra</button>
+    <button id="ayuda">Ayuda</button>
+    <div id="resultado"></div>
+    <h2>Intentos</h2>
+    <div id="intentos"></div>
+    <h2>Letras fallidas</h2>
+    <div id="letrasfallidas"></div>
+    <div id="imagenAhorcado"></div>
+  </body>
+</html>
