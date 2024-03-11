@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -35,36 +35,18 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        var cartas = [
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8",
-          "9",
-          "10",
-          "J",
-          "Q",
-          "K",
-          "A",
-        ];
+        var cartas = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
         var jugadorCartas = [];
         var dealerCartas = [];
         var jugadorPuntos = 0;
         var dealerPuntos = 0;
 
         function actualizarInterfaz() {
-          document.getElementById("cartas-jugador").textContent =
-            jugadorCartas.join(", ");
-          document.getElementById("puntos-jugador").textContent =
-            "Puntos: " + jugadorPuntos;
+          document.getElementById("cartas-jugador").textContent = jugadorCartas.join(", ");
+          document.getElementById("puntos-jugador").textContent = "Puntos: " + jugadorPuntos;
 
-          document.getElementById("cartas-dealer").textContent =
-            dealerCartas.join(", ");
-          document.getElementById("puntos-dealer").textContent =
-            "Puntos: " + dealerPuntos;
+          document.getElementById("cartas-dealer").textContent = dealerCartas.join(", ");
+          document.getElementById("puntos-dealer").textContent = "Puntos: " + dealerPuntos;
         }
 
         function nuevaPartida() {
@@ -140,27 +122,205 @@
           document.getElementById("terminar-turno").disabled = !terminarTurno;
         }
 
-        document
-          .getElementById("nueva-partida")
-          .addEventListener("click", function () {
-            nuevaPartida();
-            habilitarBotones(false, true, true);
-          });
+        document.getElementById("nueva-partida").addEventListener("click", function () {
+          nuevaPartida();
+          habilitarBotones(false, true, true);
+        });
 
-        document
-          .getElementById("pedir-carta")
-          .addEventListener("click", function () {
-            pedirCarta(jugadorCartas, "puntos-jugador");
-          });
+        document.getElementById("pedir-carta").addEventListener("click", function () {
+          pedirCarta(jugadorCartas, "puntos-jugador");
+        });
 
-        document
-          .getElementById("terminar-turno")
-          .addEventListener("click", function () {
-            terminarTurno();
-          });
+        document.getElementById("terminar-turno").addEventListener("click", function () {
+          terminarTurno();
+        });
 
         nuevaPartida();
       });
     </script>
   </body>
 </html>
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ahorcado</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+
+      #word-display {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      #guesses-left {
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+
+      #letters {
+        margin-bottom: 20px;
+      }
+
+      #failures {
+        color: red;
+        margin-bottom: 20px;
+      }
+
+      #message {
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Juego del Ahorcado</h1>
+
+    <div id="word-display"></div>
+    <div id="guesses-left"></div>
+    <div id="letters"></div>
+    <div id="failures"></div>
+    <div id="message"></div>
+
+    <script>
+      // Palabras proporcionadas por el usuario
+      const palabras = [
+        "javascript",
+        "html",
+        "css",
+        "python",
+        "web",
+        "developer",
+        "programacion",
+        "tecnologia",
+        "computadora",
+        "codigo",
+      ];
+
+      // Seleccionar una palabra aleatoria
+      let palabraSeleccionada = palabras[Math.floor(Math.random() * palabras.length)];
+
+      // Inicializar variables
+      let intentosRestantes = 5;
+      let letrasAdivinadas = Array(palabraSeleccionada.length).fill("_");
+      let letrasFallidas = [];
+      let palabraCompletada = false;
+
+      // Actualizar la pantalla
+      function actualizarPantalla() {
+        document.getElementById("word-display").textContent = letrasAdivinadas.join(" ");
+        document.getElementById(
+          "guesses-left"
+        ).textContent = `Intentos restantes: ${intentosRestantes}`;
+        document.getElementById("letters").textContent =
+          "Letras fallidas: " + letrasFallidas.join(", ");
+      }
+
+      // Comprobar si la letra está en la palabra
+      function comprobarLetra(letra) {
+        if (palabraSeleccionada.includes(letra)) {
+          for (let i = 0; i < palabraSeleccionada.length; i++) {
+            if (palabraSeleccionada[i] === letra) {
+              letrasAdivinadas[i] = letra;
+            }
+          }
+        } else {
+          letrasFallidas.push(letra);
+          intentosRestantes--;
+        }
+      }
+
+      // Comprobar si la palabra ha sido completada
+      function comprobarPalabra() {
+        if (letrasAdivinadas.join("") === palabraSeleccionada) {
+          palabraCompletada = true;
+        }
+      }
+
+      // Evento de clic en la letra
+      document.getElementById("letters").addEventListener("click", function (event) {
+        if (event.target.tagName === "SPAN") {
+          const letra = event.target.textContent.toLowerCase();
+          if (!letrasFallidas.includes(letra) && !letrasAdivinadas.includes(letra)) {
+            comprobarLetra(letra);
+            comprobarPalabra();
+            actualizarPantalla();
+          }
+        }
+      });
+
+      // Evento de doble clic en el botón de ayuda
+      document.getElementById("help").addEventListener("dblclick", function () {
+        const letrasRepetidas = palabraSeleccionada.split("").reduce((acc, letra) => {
+          acc[letra] = (acc[letra] || 0) + 1;
+          return acc;
+        }, {});
+
+        const letraMasRepetida = Object.keys(letrasRepetidas).reduce((a, b) =>
+          letrasRepetidas[a] > letrasRepetidas[b] ? a : b
+        );
+
+        if (
+          !letrasFallidas.includes(letraMasRepetida) &&
+          !letrasAdivinadas.includes(letraMasRepetida)
+        ) {
+          comprobarLetra(letraMasRepetida);
+          comprobarPalabra();
+          actualizarPantalla();
+        }
+
+        intentosRestantes -= 2;
+      });
+
+      // Evento de clic en el botón de comprobación de palabra
+      document.getElementById("check-word").addEventListener("click", function () {
+        const palabraUsuario = prompt("Introduce la palabra:");
+        if (palabraUsuario && palabraUsuario.toLowerCase() === palabraSeleccionada) {
+          palabraCompletada = true;
+        } else {
+          intentosRestantes = 0;
+        }
+
+        actualizarPantalla();
+      });
+
+      // Evento de clic en el botón de reinicio
+      document.getElementById("reset").addEventListener("click", function () {
+        window.location.reload();
+      });
+
+      // Función principal para iniciar el juego
+      function iniciarJuego() {
+        actualizarPantalla();
+
+        // Bucle del juego
+        const bucleJuego = setInterval(function () {
+          if (intentosRestantes === 0) {
+            document.getElementById("message").textContent = "¡Has perdido! Intenta de nuevo.";
+            clearInterval(bucleJuego);
+            guardarCookie(false);
+          } else if (palabraCompletada) {
+            document.getElementById("message").textContent = "¡Enhorabuena, has ganado!";
+            clearInterval(bucleJuego);
+            guardarCookie(true);
+          }
+        }, 100);
+      }
+
+      // Guardar cookie
+      function guardarCookie(ganado) {
+        const date = new Date();
+        date.setTime(date.getTime() + 8 * 60 * 1000); // Expira en 8 minutos
+        document.cookie = `ahorcado=${ganado};expires=${date.toUTCString()};path=/`;
+      }
+
+      // Iniciar el juego al cargar la página
+      window.onload = iniciarJuego;
+    </script>
+  </body>
+</html>
+-->

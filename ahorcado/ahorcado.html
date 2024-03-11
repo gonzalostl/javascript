@@ -8,26 +8,22 @@
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        //======================================================================
         // VARIABLES
-        //======================================================================
-
         let listaPalabras = [];
         let palabraAdivinar = [];
         let palabraMostrar = [];
-        let historialLetrasUsuario = [];
+        let letrasfallidas = [];
         let numIntentos = 5;
         let nodoLetra = document.querySelector("#letra");
-        let nodoBoton = document.querySelector("#boton");
+        let nodoBoton = document.querySelector("#comprobarLetra");
         let nodoComprobarPalabra = document.querySelector("#comprobarPalabra");
         let nodoAyuda = document.querySelector("#ayuda");
         let nodoResultado = document.querySelector("#resultado");
         let nodoIntentos = document.querySelector("#intentos");
         let nodoHistorial = document.querySelector("#letrasfallidas");
 
-        //======================================================================
-        // FUNCIONES
-        //======================================================================
+        //FUNCIONES
+
         document.addEventListener("keydown", function (event) {
           if (event.key == "f") {
             location.reload();
@@ -39,11 +35,7 @@
           let fechaExpiracion = new Date();
           fechaExpiracion.setTime(fechaExpiracion.getTime() + 8 * 60 * 1000); // 8 minutos
           document.cookie =
-            "resultado=" +
-            resultado +
-            ";expires=" +
-            fechaExpiracion.toUTCString() +
-            ";path=/";
+            "resultado=" + resultado + ";expires=" + fechaExpiracion.toUTCString() + ";path=/";
         }
 
         // Función para obtener el valor de la cookie
@@ -63,10 +55,9 @@
 
         function prepararJuego() {
           // Pide al usuario que introduzca las palabras
-          let inputPalabras = prompt(
-            "Introduce 10 palabras separadas por comas:"
-          );
+          let inputPalabras = prompt("Introduce 10 palabras separadas por comas:");
           listaPalabras = inputPalabras.split(",");
+          console.log(listaPalabras);
 
           //palabra aleatoria
           let posAleatoriaListaPalabras = _.random(listaPalabras.length - 1);
@@ -92,7 +83,7 @@
           // Muestra los intentos
           nodoIntentos.textContent = numIntentos;
           // Muestra letras fallidas
-          nodoHistorial.textContent = historialLetrasUsuario.join(" ");
+          nodoHistorial.textContent = letrasfallidas.join(" ");
         }
 
         function comprobarLetraUsuario() {
@@ -115,7 +106,11 @@
             // Resto un intento
             numIntentos -= 1;
             // Guardo en letras fallidas la letra pulsada
-            historialLetrasUsuario.push(letraUsuario);
+            letrasfallidas.push(letraUsuario);
+
+            //mostrar imagen
+            let imagen = document.getElementById("imagenAhorcado");
+            imagen.src = `./${numIntentos}.png`;
           }
 
           acabarJuego();
@@ -126,10 +121,7 @@
         function comprobarPalabraUsuario() {
           let palabraUsuario = prompt("Introduce la palabra:");
 
-          if (
-            palabraUsuario.toLowerCase() ===
-            palabraAdivinar.join("").toLowerCase()
-          ) {
+          if (palabraUsuario.toLowerCase() === palabraAdivinar.join("").toLowerCase()) {
             alert("¡Enhorabuena!");
             location.reload(true);
           } else {
@@ -159,9 +151,7 @@
             numIntentos -= 2;
             // Mostrar alerta con la letra de ayuda
             alert(
-              "Pista: La letra más repetida es '" +
-                letraMasRepetida +
-                "'. Se restan 2 intentos."
+              "Pista: La letra más repetida es '" + letraMasRepetida + "'. Se restan 2 intentos."
             );
             // Actualizar el juego
             mostrarJuego();
@@ -205,18 +195,14 @@
           }
 
           if (numIntentos == 0) {
-            alert(
-              "¡Animo para la siguiente! La palabra era: " +
-                palabraAdivinar.join("")
-            );
+            alert("¡Animo para la siguiente! La palabra era: " + palabraAdivinar.join(""));
             ResultadoCookie("perdido");
             location.reload(true);
           }
         }
 
-        //======================================================================
         // EVENTOS
-        //======================================================================
+
         // Al hacer clic en el boton y enter se llama la funcion comprobarLetraUsuario
         nodoBoton.addEventListener("click", comprobarLetraUsuario);
         nodoLetra.addEventListener("keyup", comprobarPulsadoEnter);
@@ -226,16 +212,13 @@
         //Doble click boton ayuda
         nodoAyuda.addEventListener("dblclick", obtenerAyuda);
 
-        //======================================================================
-        // INICIO
-        //======================================================================
         prepararJuego();
       });
     </script>
   </head>
   <body>
-    <input id="letra" type="text" placeholder="Dame una letra" maxlength="1" />
-    <button id="boton">Comprobar</button>
+    <input id="letra" type="text" placeholder="Dime una letra" maxlength="1" />
+    <button id="comprobarLetra">Comprobar</button>
     <button id="comprobarPalabra">Comprobar palabra</button>
     <button id="ayuda">Ayuda</button>
     <div id="resultado"></div>
@@ -243,6 +226,6 @@
     <div id="intentos"></div>
     <h2>Letras fallidas</h2>
     <div id="letrasfallidas"></div>
-    <div id="imagenAhorcado"></div>
+    <img id="imagenAhorcado" src="./5.png" />
   </body>
 </html>
