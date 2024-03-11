@@ -149,6 +149,10 @@
           if (letraMasRepetida) {
             // Restar dos intentos
             numIntentos -= 2;
+            //cambiar imagen
+            let imagen = document.getElementById("imagenAhorcado");
+            imagen.src = `./${numIntentos}.png`;
+
             // Mostrar alerta con la letra de ayuda
             alert(
               "Pista: La letra más repetida es '" + letraMasRepetida + "'. Se restan 2 intentos."
